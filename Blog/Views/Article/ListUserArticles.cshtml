@@ -1,6 +1,6 @@
 ﻿@model List<Blog.Models.Article>
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "ListUserArticles";
 }
 
 
@@ -19,9 +19,10 @@
                         @article.Content
                     </p>
                     <small class="text-info">
-                        Visited @article.VisitCounter times
+                            Category - @article.Category.Name , 
+                            Visited @article.VisitCounter times
                     </small>
-
+            
                     <footer>
                         <div class="pull-left">
                             @foreach (var tag in article.Tags)
@@ -40,21 +41,3 @@
 </div>
 <hr />
 
-
-
-@*<div class="container">
-    @foreach (var article in Model)
-    {
-        <article class="col-sm-4">
-            <h1>
-                @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id}, null)
-            </h1>
-            <p>
-                @article.Content
-            </p>
-            <footer>
-                @article.Author.FullName
-            </footer>
-        </article>
-    }
-</div>*@

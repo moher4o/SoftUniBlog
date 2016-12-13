@@ -291,6 +291,7 @@
     <Content Include="Views\Category\ListArticlesOfCategory.cshtml" />
     <Content Include="Views\Home\ListCategories.cshtml" />
     <Content Include="Views\Tag\ListArticlesByTag.cshtml" />
+    <Content Include="Views\Article\ListUserArticles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

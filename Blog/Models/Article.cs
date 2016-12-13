@@ -31,7 +31,7 @@ namespace Blog.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         public string Content { get; set; }

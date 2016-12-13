@@ -24,8 +24,7 @@ namespace Blog.Controllers.Admin
         {
             using (var db = new BlogDbContext())
             {
-                var users = db.Users
-                            .ToList();
+                var users = db.Users.ToList();
 
                 ViewBag.Admins = GetAdmins(db);
 

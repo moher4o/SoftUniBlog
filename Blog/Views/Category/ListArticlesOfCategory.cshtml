@@ -17,6 +17,11 @@
                     <p>
                         @article.Content
                     </p>
+                    <small class="text-info">
+                        Category - @article.Category.Name ,
+                        Visited @article.VisitCounter times
+                    </small>
+
                     <footer>
                         <div class="pull-left">
                             @foreach (var tag in article.Tags)

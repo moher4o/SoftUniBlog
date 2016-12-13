@@ -32,6 +32,21 @@ namespace Blog.Controllers
             
         }
 
+        public ActionResult ListUserArticles(string id)
+        {
+            using (var db = new BlogDbContext())
+            {
+                var articles = db.Articles
+                    .Include(a => a.Author)
+                    .Include(t => t.Tags)
+                    .Include(c => c.Category)
+                    .Where(u => u.AuthorId.Equals(id))
+                    .ToList();
+                return View(articles);
+            }
+
+        }
+
         public ActionResult Details(int? id)
         {
             if(id == null)
