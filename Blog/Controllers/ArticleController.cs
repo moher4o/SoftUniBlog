@@ -59,6 +59,7 @@ namespace Blog.Controllers
                 var article = db.Articles
                     .Include(a => a.Author)
                     .Include(t => t.Tags)
+                    .Include(c => c.Comments)
                     .Where(a => a.Id == id)
                     .FirstOrDefault();
 

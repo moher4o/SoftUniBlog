@@ -15,10 +15,18 @@
                         </h2>
                     </header>
                     <p>
-                        @article.Content
+                        @if (article.Content.Length > 250)
+                        {
+                           @article.Content.Substring(0, 245) 
+                        }
+                        else
+                        {
+                           @article.Content
+                        }
+                        ...
                     </p>
                     <small class="text-info">
-                        Category - @article.Category.Name ,
+                        Category - @article.Category.Name  
                         Visited @article.VisitCounter times
                     </small>
 
@@ -39,3 +47,19 @@
     </div>
 </div>
 <hr />
+<ul>
+    <li style="float: left; list-style: outside none none; position: relative; width: 190px; margin-right: 2px;" class="bx-clone">
+        <a href="http://dnes.dir.bg/news/ukrina-ulia-timoshenko-nadja-savenko-24773200?nt=4" class="topnews-sl">
+            <div class="whatcat">Днес</div>
+            <p class="gradient">Юлия Тимошенко изгони Савченко от партията си</p>
+            <img src="http://i2.dir-i.net/CMS/2016/07/23/8/28_8vz6ia.jpg">
+        </a>
+    </li>
+    <li style="float: left; list-style: outside none none; position: relative; width: 190px; margin-right: 2px;" class="bx-clone">
+        <a href="http://dnes.dir.bg/news/gerb-tzvetan-tzvetanov-kabinet-ostavka-24773196?nt=4" class="topnews-sl">
+            <div class="whatcat">Днес</div>
+            <p class="gradient">Цветанов качи шансовете за кабинет на над 20%</p>
+            <img src="http://i3.dir-i.net/CMS/2016/12/02/x/28_xeybad.jpg">
+        </a>
+    </li>
+</ul>

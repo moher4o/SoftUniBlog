@@ -11,18 +11,9 @@
                 @Model.Title
             </h2>
         </header>
-        <p>
-            @Model.Content
-        </p>
-        <small class="author pull-right">
-            --author @Model.Author.FullName
-        </small>
-
-        <small class="info">
-            Visited @Model.VisitCounter times   
-            @Html.ActionLink(string.Format($"Comments ({Model.Comments.Count})"), "ListCommentsOfArticle", "Comment", new { @id = Model.Id }, null)
-        </small>
-        <footer>
+             <p>
+                @Model.Content
+            </p>
             <div class="pull-left">
                 @foreach (var tag in Model.Tags)
                 {
@@ -35,9 +26,33 @@
                     @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
-                @Html.ActionLink("Back", "ListArticlesOfCategory", "Category", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Back", "Details", "Article", new { @id = Model.Id }, new { @class = "btn btn-default btn-xs" })
             </div>
+         <footer>
         </footer>
     </article>
 </div>
 <hr />
+<div class="container">
+    <comments>
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="well well-sm">
+                <comment>
+                    <header>
+                        <h4>
+                            @comment.Name
+                            <em class="pull-right">@comment.Email</em>
+                        </h4>
+                    </header>
+                    <p>
+                        @comment.VisitorComment
+                    </p>
+                </comment>
+            </div>
+        }
+        @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+        <hr>
+    </comments>
+</div>
+

@@ -1,0 +1,66 @@
+﻿@model Blog.Models.Comment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container">
+    <div class="well">
+        <h2>@ViewBag.Title</h2>
+
+        @using (Html.BeginForm("Create", "Comment", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ArticleId)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+                <div class="alert">
+                    <span class="text-danger">/ Required /</span>
+                </div>
+                 
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+                <div class="alert">
+                    <span class="text-success">/ Optional /</span>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.VisitorComment, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(m => m.VisitorComment, new { @class = "form-control", @row = "10" })
+                </div>
+                <div class="alert">
+                    <span class="text-danger">/ Required /</span>
+                </div>
+
+            </div>
+
+ 
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <input type="submit" value="Comment" class="btn btn-success" />
+                </div>
+            </div>
+
+        }
+        <div class="pull-right">
+            @Html.ActionLink("Back to article comments", "ListCommentsOfArticle", "Comment", new { @id = Model.ArticleId }, null)
+        </div>
+    </div>
+</div>
+
+
+
+
+
