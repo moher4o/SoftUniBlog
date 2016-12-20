@@ -16,7 +16,15 @@
                         </h2>
                     </header>
                     <p>
-                        @article.Content
+                        @if (article.Content.Length > 250)
+                        {
+                            @article.Content.Substring(0, 245)
+                        }
+                        else
+                        {
+                            @article.Content
+                        }
+                        ...
                     </p>
                     <small class="text-info">
                         Visited @article.VisitCounter times

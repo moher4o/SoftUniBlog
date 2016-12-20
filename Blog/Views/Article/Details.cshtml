@@ -10,6 +10,14 @@
             <h2>
                 @Model.Title
             </h2>
+            @if (Model.Images.Count > 0)
+            {
+                <img src="~/images/@Model.Images.FirstOrDefault().FileName" class="pull-left" style="width: 190px; height: auto; margin-right: 2px;" />
+            }
+            else
+            {
+                <img src="~/images/noimage.png" class="pull-left" style="width: 190px; height: auto; margin-right: 2px;" />
+            }
         </header>
         <p>
             @Model.Content
@@ -33,11 +41,23 @@
                 @if (User.IsInRole("Admin") || Model.IsUserAuthor(User.Identity.Name))
                 {
                     @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Add Image", "AddImage", "Image", new { @id = Model.Id, @title = Model.Title }, new { @class = "btn btn-info btn-xs" })
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
                 @Html.ActionLink("Back", "ListArticlesOfCategory", "Category", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
             </div>
         </footer>
     </article>
+</div>
+<br />
+<hr />
+
+<div class="container">
+    
+        @foreach (var image in Model.Images)
+        {
+            <img src="~/images/@image.FileName" class="pull-left" style="width: 190px; height: auto; margin-right: 15px; margin-top: 10px;" />
+        }
+    
 </div>
 <hr />

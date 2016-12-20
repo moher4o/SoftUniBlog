@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -60,6 +61,7 @@ namespace Blog.Controllers
                     .Include(a => a.Author)
                     .Include(t => t.Tags)
                     .Include(c => c.Comments)
+                    .Include(i => i.Images)
                     .Where(a => a.Id == id)
                     .FirstOrDefault();
 
@@ -94,9 +96,10 @@ namespace Blog.Controllers
         //Post
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(ArticleViewModel model)
         {
+            
             using (var db = new BlogDbContext())
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
@@ -106,15 +109,40 @@ namespace Blog.Controllers
                 //article.Title = model.Title;
                 //article.Content = model.Content;
                 //article.CategoryId = model.CategoryId;
-
+               
                 this.SetArticleTags(article, model, db);
 
                 db.Articles.Add(article);
                 db.SaveChanges();
+            //if (file != null)
+            //{
+            //        var image = new ArticleImage();
 
-                return RedirectToAction("List");
+            //        string pic = System.IO.Path.GetFileName(file.FileName);
+            //    pic = "new" + pic;
+            //    string path = System.IO.Path.Combine(
+            //                           Server.MapPath("~/images"), pic);
+            //    // file is uploaded
+            //    file.SaveAs(path);
+            //        image.ArticleId = article.Id;
+            //        image.FileName = file.FileName;
+                    
+
+            //    // save the image path path to the database or you can send image 
+            //    // directly to database
+            //    // in-case if you want to store byte[] ie. for DB
+            //    using (MemoryStream ms = new MemoryStream())
+            //    {
+            //        file.InputStream.CopyTo(ms);
+            //        byte[] array = ms.GetBuffer();
+            //    }
+
+
+            //}
+            //// after successfully uploading redirect the user
+            return RedirectToAction("ListUserArticles", new { user.Id });
             }
-                
+
         }
 
 

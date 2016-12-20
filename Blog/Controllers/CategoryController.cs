@@ -31,6 +31,27 @@ namespace Blog.Controllers
                     .Articles
                     .ToList();
 
+                Dictionary<int, string> Articalpicture = new Dictionary<int, string>();
+                var images = db.ArticleImages.ToList();
+
+                foreach (var article in articles)
+                {
+                    var image = new ArticleImage();
+                    string Name = "noimage.png";
+                    try
+                    {
+                        Name = images.FirstOrDefault(i => i.ArticleId == article.Id).FileName;
+                        Articalpicture.Add(article.Id, Name);
+                    }
+                    catch (Exception)
+                    {
+                        Articalpicture.Add(article.Id, Name);
+                        //throw;
+                    }
+
+
+                }
+                ViewBag.Pictures = Articalpicture;
                 return View(articles);
             }
            

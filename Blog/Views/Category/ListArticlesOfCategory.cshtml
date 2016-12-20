@@ -1,65 +1,53 @@
 ﻿@model List<Blog.Models.Article>
+
 @{
     ViewBag.Title = "ListArticlesOfCategory";
 }
 
 <div class="container">
     <div class="row">
-        @foreach (var article in Model)
+        @foreach (var article in @Model)
         {
             <div class="col-sm-6">
-                <article>
-                    <header>
-                        <h2>
-                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
-                        </h2>
-                    </header>
-                    <p>
-                        @if (article.Content.Length > 250)
-                        {
-                           @article.Content.Substring(0, 245) 
-                        }
-                        else
-                        {
-                           @article.Content
-                        }
-                        ...
-                    </p>
-                    <small class="text-info">
-                        Category - @article.Category.Name  
-                        Visited @article.VisitCounter times
-                    </small>
+                
+                    <article>
 
-                    <footer>
-                        <div class="pull-left">
-                            @foreach (var tag in article.Tags)
+                        <header>
+                            <h3>
+                                @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                            </h3>
+                            <img src="~/images/@ViewBag.Pictures[article.Id]" class="pull-left" style="width: 140px; height: auto; margin-right: 2px;"/>
+                        </header>
+                        <p>
+                            @if (article.Content.Length > 250)
                             {
-                                <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                                @article.Content.Substring(0, 245)
                             }
-                        </div>
-                        <small class="author pull-right">
-                            --author @article.Author.FullName
+                            else
+                            {
+                                @article.Content
+                            }
+                            ...
+                        </p>
+                        <small class="text-info">
+                            Category - @article.Category.Name
+                            Visited @article.VisitCounter times
                         </small>
-                    </footer>
-                </article>
+                        <footer>
+                            <div class="pull-left">
+                                @foreach (var tag in article.Tags)
+                                {
+                                    <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                                }
+                            </div>
+                            <small class="author pull-right">
+                                --author @article.Author.FullName
+                            </small>
+                        </footer>
+                    </article>
             </div>
         }
     </div>
 </div>
 <hr />
-<ul>
-    <li style="float: left; list-style: outside none none; position: relative; width: 190px; margin-right: 2px;" class="bx-clone">
-        <a href="http://dnes.dir.bg/news/ukrina-ulia-timoshenko-nadja-savenko-24773200?nt=4" class="topnews-sl">
-            <div class="whatcat">Днес</div>
-            <p class="gradient">Юлия Тимошенко изгони Савченко от партията си</p>
-            <img src="http://i2.dir-i.net/CMS/2016/07/23/8/28_8vz6ia.jpg">
-        </a>
-    </li>
-    <li style="float: left; list-style: outside none none; position: relative; width: 190px; margin-right: 2px;" class="bx-clone">
-        <a href="http://dnes.dir.bg/news/gerb-tzvetan-tzvetanov-kabinet-ostavka-24773196?nt=4" class="topnews-sl">
-            <div class="whatcat">Днес</div>
-            <p class="gradient">Цветанов качи шансовете за кабинет на над 20%</p>
-            <img src="http://i3.dir-i.net/CMS/2016/12/02/x/28_xeybad.jpg">
-        </a>
-    </li>
-</ul>
+

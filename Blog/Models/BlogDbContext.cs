@@ -27,5 +27,7 @@ namespace Blog.Models
         }
 
         public System.Data.Entity.DbSet<Blog.Models.Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<Blog.Models.ArticleImage> ArticleImages { get; set; }
     }
 }
