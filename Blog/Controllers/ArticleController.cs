@@ -254,8 +254,24 @@ namespace Blog.Controllers
                     return HttpNotFound();
                 }
 
+                var comments = db.Comments.Where(c => c.ArticleId == id);
+                var images = db.ArticleImages.Where(i => i.ArticleId == id);
                 db.Articles.Remove(article);
                 db.SaveChanges();
+
+                foreach (var comment in comments)
+                {
+                    db.Comments.Remove(comment);
+                    db.SaveChanges();
+                }
+
+                
+                foreach (var image in images)
+                {
+                    DeleteFileFromFolder(image.FileName);
+                    db.ArticleImages.Remove(image);
+                    db.SaveChanges();
+                }
 
                 return RedirectToAction("ListCategories", "Home");
             }
@@ -291,6 +307,20 @@ namespace Blog.Controllers
 
                 article.Tags.Add(tag);
             }
+        }
+
+        public void DeleteFileFromFolder(string StrFilename)
+        {
+
+            string strPhysicalFolder = Server.MapPath("~/images");
+
+            string strFileFullPath = strPhysicalFolder + StrFilename;
+
+            if (System.IO.File.Exists(strFileFullPath))
+            {
+                System.IO.File.Delete(strFileFullPath);
+            }
+
         }
 
     }
